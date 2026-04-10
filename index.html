@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Herman Walton — Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f5f3ee;
+    --surface: #ffffff;
+    --surface2: #f0ede6;
+    --text: #1a1916;
+    --text2: #5a574f;
+    --text3: #8c8880;
+    --accent: #1aaa7a;
+    --accent-dark: #0f6e56;
+    --accent-light: #e1f5ee;
+    --border: rgba(26,25,22,0.1);
+    --border2: rgba(26,25,22,0.06);
+    --nav-bg: rgba(245,243,238,0.9);
+    --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 4px 16px rgba(0,0,0,0.04);
+    --shadow-lg: 0 8px 32px rgba(0,0,0,0.08);
+  }
+  [data-theme="dark"] {
+    --bg: #0f0f0d;
+    --surface: #1a1916;
+    --surface2: #232220;
+    --text: #f0ede6;
+    --text2: #a09d96;
+    --text3: #68655e;
+    --accent: #1aaa7a;
+    --accent-dark: #5dcaa5;
+    --accent-light: #04342c;
+    --border: rgba(240,237,230,0.1);
+    --border2: rgba(240,237,230,0.05);
+    --nav-bg: rgba(15,15,13,0.92);
+    --shadow: 0 1px 3px rgba(0,0,0,0.3), 0 4px 16px rgba(0,0,0,0.2);
+    --shadow-lg: 0 8px 32px rgba(0,0,0,0.4);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    transition: background 0.3s, color 0.3s;
+    line-height: 1.6;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: var(--nav-bg);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border2);
+    padding: 0 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 60px;
+    transition: background 0.3s;
+  }
+  .nav-logo {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.25rem;
+    color: var(--text);
+    text-decoration: none;
+  }
+  .nav-links {
+    display: flex; align-items: center; gap: 2rem;
+    list-style: none;
+  }
+  .nav-links a {
+    font-size: 0.875rem; font-weight: 500;
+    color: var(--text2); text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+  .theme-btn {
+    width: 40px; height: 40px; border-radius: 50%;
+    background: var(--surface2); border: 1px solid var(--border);
+    cursor: pointer; display: flex; align-items: center; justify-content: center;
+    font-size: 1rem; transition: background 0.2s, transform 0.2s;
+    color: var(--text);
+  }
+  .theme-btn:hover { transform: rotate(20deg); background: var(--accent-light); }
+  .hamburger {
+    display: none; flex-direction: column; gap: 5px; cursor: pointer;
+    background: none; border: none; padding: 4px;
+  }
+  .hamburger span {
+    display: block; width: 22px; height: 2px;
+    background: var(--text2); border-radius: 2px; transition: 0.3s;
+  }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    padding: 80px 2rem 4rem;
+    max-width: 1100px; margin: 0 auto;
+    gap: 4rem;
+  }
+  .hero-text { flex: 1; }
+  .hero-tag {
+    display: inline-block;
+    font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: var(--accent-light);
+    padding: 4px 12px; border-radius: 20px;
+    margin-bottom: 1.25rem;
+  }
+  .hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2.8rem, 6vw, 5rem);
+    line-height: 1.05;
+    color: var(--text);
+    margin-bottom: 1rem;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+  .hero-desc {
+    font-size: 1.05rem; color: var(--text2);
+    max-width: 480px; margin-bottom: 2rem; line-height: 1.75;
+  }
+  .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--accent); color: #fff;
+    padding: 0.75rem 1.75rem; border-radius: 8px;
+    text-decoration: none; font-weight: 500; font-size: 0.9rem;
+    border: 2px solid var(--accent);
+    transition: background 0.2s, transform 0.15s;
+  }
+  .btn-primary:hover { background: var(--accent-dark); border-color: var(--accent-dark); transform: translateY(-1px); }
+  .btn-outline {
+    background: transparent; color: var(--text);
+    padding: 0.75rem 1.75rem; border-radius: 8px;
+    text-decoration: none; font-weight: 500; font-size: 0.9rem;
+    border: 2px solid var(--border);
+    transition: border-color 0.2s, transform 0.15s;
+  }
+  .btn-outline:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-1px); }
+  .hero-visual {
+    flex-shrink: 0;
+    position: relative;
+  }
+  .avatar-wrap {
+    width: 280px; height: 320px;
+    border-radius: 140px 140px 80px 80px;
+    background: var(--accent-light);
+    overflow: hidden; position: relative;
+    border: 3px solid var(--accent);
+  }
+  .avatar-placeholder {
+    width: 100%; height: 100%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'DM Serif Display', serif;
+    font-size: 6rem; color: var(--accent);
+    background: var(--accent-light);
+    user-select: none;
+  }
+  .hero-badge {
+    position: absolute; bottom: -16px; right: -16px;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 16px; padding: 12px 20px;
+    box-shadow: var(--shadow-lg);
+    font-size: 0.8rem;
+  }
+  .hero-badge strong { display: block; font-size: 1.1rem; color: var(--accent); }
+  .hero-badge span { color: var(--text2); }
+
+  /* SECTION BASE */
+  section { padding: 5rem 2rem; }
+  .container { max-width: 1100px; margin: 0 auto; }
+  .section-label {
+    font-size: 0.7rem; font-weight: 600; letter-spacing: 0.15em;
+    text-transform: uppercase; color: var(--accent);
+    margin-bottom: 0.5rem;
+  }
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(1.8rem, 4vw, 2.75rem);
+    line-height: 1.15;
+    margin-bottom: 3rem;
+  }
+
+  /* ABOUT */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem; align-items: center;
+  }
+  .about-text p {
+    color: var(--text2); line-height: 1.8; margin-bottom: 1rem;
+  }
+  .stats-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+  .stat-card {
+    background: var(--surface);
+    border: 1px solid var(--border2);
+    border-radius: 16px; padding: 1.5rem;
+    box-shadow: var(--shadow);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .stat-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
+  .stat-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2.2rem; color: var(--accent); margin-bottom: 4px;
+  }
+  .stat-label { font-size: 0.8rem; color: var(--text2); }
+
+  /* SKILLS */
+  .skills-bg { background: var(--surface); }
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+  }
+  .skill-pill {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 12px; padding: 1rem 1.25rem;
+    display: flex; align-items: center; gap: 0.75rem;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .skill-pill:hover { border-color: var(--accent); transform: translateY(-2px); }
+  .skill-dot {
+    width: 10px; height: 10px; border-radius: 50%;
+    background: var(--accent); flex-shrink: 0;
+  }
+  .skill-name { font-size: 0.9rem; font-weight: 500; }
+
+  /* EXPERIENCE */
+  .timeline { position: relative; padding-left: 2rem; }
+  .timeline::before {
+    content: '';
+    position: absolute; left: 0; top: 8px; bottom: 0;
+    width: 2px; background: var(--border);
+    border-radius: 2px;
+  }
+  .timeline-item {
+    position: relative; margin-bottom: 3rem;
+  }
+  .timeline-item::before {
+    content: '';
+    position: absolute; left: -2.5rem; top: 6px;
+    width: 12px; height: 12px; border-radius: 50%;
+    background: var(--accent); border: 3px solid var(--bg);
+    box-shadow: 0 0 0 2px var(--accent);
+  }
+  .timeline-date {
+    font-size: 0.75rem; font-weight: 600; letter-spacing: 0.05em;
+    color: var(--accent); margin-bottom: 0.4rem;
+    text-transform: uppercase;
+  }
+  .timeline-role {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.3rem; margin-bottom: 0.2rem;
+  }
+  .timeline-company {
+    font-size: 0.9rem; color: var(--text2); margin-bottom: 1rem;
+  }
+  .timeline-list { list-style: none; padding: 0; }
+  .timeline-list li {
+    font-size: 0.9rem; color: var(--text2); line-height: 1.7;
+    padding: 0.2rem 0; padding-left: 1rem; position: relative;
+  }
+  .timeline-list li::before {
+    content: '→'; position: absolute; left: 0; color: var(--accent);
+  }
+
+  /* EDUCATION */
+  .edu-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+  .edu-card {
+    background: var(--surface); border: 1px solid var(--border2);
+    border-radius: 20px; padding: 2rem;
+    box-shadow: var(--shadow);
+    transition: transform 0.2s, box-shadow 0.2s;
+    position: relative; overflow: hidden;
+  }
+  .edu-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+    background: var(--accent);
+  }
+  .edu-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+  .edu-degree {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.2rem; margin-bottom: 0.4rem;
+  }
+  .edu-school { font-size: 0.9rem; color: var(--accent); font-weight: 500; margin-bottom: 0.4rem; }
+  .edu-period { font-size: 0.8rem; color: var(--text3); margin-bottom: 1rem; }
+  .edu-note { font-size: 0.85rem; color: var(--text2); line-height: 1.6; }
+
+  /* LANGUAGES */
+  .lang-grid {
+    display: flex; gap: 1rem; flex-wrap: wrap;
+  }
+  .lang-card {
+    background: var(--surface);
+    border: 1px solid var(--border2);
+    border-radius: 12px; padding: 1.25rem 2rem;
+    display: flex; flex-direction: column; align-items: center; gap: 6px;
+    box-shadow: var(--shadow);
+  }
+  .lang-flag { font-size: 2rem; }
+  .lang-name { font-weight: 500; font-size: 0.95rem; }
+  .lang-level { font-size: 0.75rem; color: var(--text3); }
+
+  /* CONTACT */
+  .contact-bg { background: var(--surface); }
+  .contact-inner {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 4rem; align-items: start;
+  }
+  .contact-text h2 { font-family: 'DM Serif Display', serif; font-size: 2rem; margin-bottom: 1rem; }
+  .contact-text p { color: var(--text2); line-height: 1.8; margin-bottom: 2rem; }
+  .contact-info { display: flex; flex-direction: column; gap: 1rem; }
+  .contact-item {
+    display: flex; align-items: center; gap: 1rem;
+  }
+  .contact-icon {
+    width: 40px; height: 40px; border-radius: 10px;
+    background: var(--accent-light); border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem; flex-shrink: 0;
+  }
+  .contact-item-text strong { display: block; font-size: 0.75rem; color: var(--text3); text-transform: uppercase; letter-spacing: 0.08em; }
+  .contact-item-text span { font-size: 0.9rem; color: var(--text); }
+  .contact-form { display: flex; flex-direction: column; gap: 1rem; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .form-group { display: flex; flex-direction: column; gap: 6px; }
+  .form-group label { font-size: 0.8rem; font-weight: 500; color: var(--text2); }
+  .form-group input, .form-group textarea {
+    background: var(--bg); border: 1px solid var(--border);
+    border-radius: 10px; padding: 0.75rem 1rem;
+    font-family: 'DM Sans', sans-serif; font-size: 0.9rem;
+    color: var(--text); outline: none; resize: none;
+    transition: border-color 0.2s;
+  }
+  .form-group input:focus, .form-group textarea:focus {
+    border-color: var(--accent);
+  }
+  .form-group textarea { min-height: 120px; }
+  .btn-send {
+    background: var(--accent); color: #fff;
+    padding: 0.9rem; border-radius: 10px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem; font-weight: 500;
+    border: none; cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .btn-send:hover { background: var(--accent-dark); transform: translateY(-1px); }
+
+  /* FOOTER */
+  footer {
+    text-align: center; padding: 2rem;
+    border-top: 1px solid var(--border2);
+    font-size: 0.8rem; color: var(--text3);
+  }
+
+  /* MOBILE */
+  @media (max-width: 768px) {
+    .hero { flex-direction: column-reverse; gap: 2rem; padding-top: 100px; text-align: center; }
+    .hero-actions { justify-content: center; }
+    .hero-desc { margin: 0 auto 2rem; }
+    .avatar-wrap { width: 200px; height: 240px; }
+    .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .contact-inner { grid-template-columns: 1fr; gap: 2rem; }
+    .form-row { grid-template-columns: 1fr; }
+    .nav-links { display: none; flex-direction: column; position: absolute; top: 60px; left: 0; right: 0; background: var(--nav-bg); backdrop-filter: blur(12px); padding: 1rem 2rem; border-bottom: 1px solid var(--border2); gap: 1rem; }
+    .nav-links.open { display: flex; }
+    .hamburger { display: flex; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">H.W.</a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div style="display:flex;align-items:center;gap:12px;">
+    <button class="theme-btn" id="themeToggle" aria-label="Toggle theme">☀️</button>
+    <button class="hamburger" id="hamburger" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero container">
+    <div class="hero-text">
+      <span class="hero-tag">Available for hire</span>
+      <h1>Herman<br><em>Walton</em></h1>
+      <p class="hero-desc">A driven and tech-savvy communications graduate based in New York, ready to bring positive energy and sharp digital skills to any team.</p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn-primary">Get in touch</a>
+        <a href="#experience" class="btn-outline">View experience</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="avatar-wrap">
+        <div class="avatar-placeholder">HW</div>
+      </div>
+      <div class="hero-badge">
+        <strong>NYC</strong>
+        <span>New York, USA</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <p class="section-label">About me</p>
+    <div class="about-grid">
+      <div class="about-text">
+        <h2 class="section-title">Hardworking student<br>with a <em style="font-style:italic;color:var(--accent)">digital edge</em></h2>
+        <p>I'm a communications graduate with a passion for technology and a drive to help organisations grow. Technologically adept, I'm comfortable across a wide range of social media platforms, office technology, and advanced computer applications.</p>
+        <p>I bring a positive attitude and a genuine willingness to learn new systems quickly. My retail background has sharpened my communication and customer service skills, and I'm eager to put them to work in a fresh environment.</p>
+        <a href="mailto:hw_alton77_x@yahoo.com" class="btn-primary" style="display:inline-block;margin-top:1rem;">Say hello →</a>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-num">5+</div>
+          <div class="stat-label">Years retail experience</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">2</div>
+          <div class="stat-label">Languages spoken</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">BA</div>
+          <div class="stat-label">Communications degree</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">NYC</div>
+          <div class="stat-label">Based in New York</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" class="skills-bg">
+  <div class="container">
+    <p class="section-label">What I bring</p>
+    <h2 class="section-title">Skills &amp; strengths</h2>
+    <div class="skills-grid">
+      <div class="skill-pill"><span class="skill-dot"></span><span class="skill-name">Advanced Communication</span></div>
+      <div class="skill-pill"><span class="skill-dot"></span><span class="skill-name">Office Technology</span></div>
+      <div class="skill-pill"><span class="skill-dot"></span><span class="skill-name">Social Media Platforms</span></div>
+      <div class="skill-pill"><span class="skill-dot"></span><span class="skill-name">Motivated Attitude</span></div>
+      <div class="skill-pill"><span class="skill-dot"></span><span class="skill-name">Customer Service</span></div>
+      <div class="skill-pill"><span class="skill-dot"></span><span class="skill-name">Project Management</span></div>
+      <div class="skill-pill"><span class="skill-dot"></span><span class="skill-name">Team Collaboration</span></div>
+      <div class="skill-pill"><span class="skill-dot"></span><span class="skill-name">Fast Learner</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="container">
+    <p class="section-label">Work history</p>
+    <h2 class="section-title">Experience</h2>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-date">Sep 2015 — Jun 2018</div>
+        <div class="timeline-role">Sales Associate</div>
+        <div class="timeline-company">Big Apple Bookstore · New York, NY</div>
+        <ul class="timeline-list">
+          <li>Greeted customers and assisted them with finding books.</li>
+          <li>Offered literary suggestions based on the needs and desires of each customer.</li>
+          <li>Followed directions from supervisors and managed projects with precision.</li>
+          <li>Organised stock and upheld the policies and mission of the bookstore.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education" class="skills-bg">
+  <div class="container">
+    <p class="section-label">Academic background</p>
+    <h2 class="section-title">Education</h2>
+    <div class="edu-grid">
+      <div class="edu-card">
+        <div class="edu-degree">Bachelor of Communications</div>
+        <div class="edu-school">New York University · New York, NY</div>
+        <div class="edu-period">August 2016 — August 2021</div>
+        <div class="edu-note">Working towards a Communications Degree, developing skills in media, technology, and interpersonal communication.</div>
+      </div>
+      <div class="edu-card">
+        <div class="edu-degree">High School Diploma</div>
+        <div class="edu-school">Regis High School · New York, NY</div>
+        <div class="edu-period">September 2012 — May 2016</div>
+        <div class="edu-note">Graduated with High Honors, demonstrating strong academic commitment and discipline.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LANGUAGES -->
+<section>
+  <div class="container">
+    <p class="section-label">Languages</p>
+    <h2 class="section-title">I speak</h2>
+    <div class="lang-grid">
+      <div class="lang-card">
+        <div class="lang-flag">🇺🇸</div>
+        <div class="lang-name">English</div>
+        <div class="lang-level">Native</div>
+      </div>
+      <div class="lang-card">
+        <div class="lang-flag">🇫🇷</div>
+        <div class="lang-name">French</div>
+        <div class="lang-level">Conversational</div>
+      </div>
+      <div class="lang-card">
+        <div class="lang-flag">🇳🇱</div>
+        <div class="lang-name">Dutch</div>
+        <div class="lang-level">Conversational</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact-bg">
+  <div class="container">
+    <div class="contact-inner">
+      <div>
+        <p class="section-label">Get in touch</p>
+        <h2 class="section-title" style="margin-bottom:1rem;">Let's work<br><em style="font-style:italic;color:var(--accent)">together</em></h2>
+        <p style="color:var(--text2);line-height:1.8;margin-bottom:2rem;">I'm actively seeking new opportunities. Whether you have a role in mind or just want to connect, my inbox is always open.</p>
+        <div class="contact-info">
+          <div class="contact-item">
+            <div class="contact-icon">📍</div>
+            <div class="contact-item-text">
+              <strong>Address</strong>
+              <span>4200 Patterno Avenue, New York, NY 10471</span>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">📞</div>
+            <div class="contact-item-text">
+              <strong>Phone</strong>
+              <span>(917) 324-1818</span>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">✉️</div>
+            <div class="contact-item-text">
+              <strong>Email</strong>
+              <span>hw_alton77_x@yahoo.com</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <form class="contact-form" onsubmit="handleSubmit(event)">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="fname">First name</label>
+            <input type="text" id="fname" placeholder="Jane">
+          </div>
+          <div class="form-group">
+            <label for="lname">Last name</label>
+            <input type="text" id="lname" placeholder="Smith">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" placeholder="jane@example.com">
+        </div>
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea id="message" placeholder="Tell me about the opportunity..."></textarea>
+        </div>
+        <button type="submit" class="btn-send" id="submitBtn">Send message</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2024 Herman Walton · New York, NY · Built with care</p>
+</footer>
+
+<script>
+  const html = document.documentElement;
+  const btn = document.getElementById('themeToggle');
+  const hamburger = document.getElementById('hamburger');
+  const navLinks = document.getElementById('navLinks');
+
+  function setTheme(t) {
+    html.setAttribute('data-theme', t);
+    btn.textContent = t === 'dark' ? '🌙' : '☀️';
+    localStorage.setItem('theme', t);
+  }
+
+  const saved = localStorage.getItem('theme') ||
+    (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+  setTheme(saved);
+
+  btn.addEventListener('click', () => {
+    setTheme(html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+  });
+
+  hamburger.addEventListener('click', () => {
+    navLinks.classList.toggle('open');
+  });
+
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    a.addEventListener('click', () => navLinks.classList.remove('open'));
+  });
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    const b = document.getElementById('submitBtn');
+    b.textContent = 'Message sent ✓';
+    b.style.background = '#0f6e56';
+    setTimeout(() => {
+      b.textContent = 'Send message';
+      b.style.background = '';
+      e.target.reset();
+    }, 3000);
+  }
+</script>
+</body>
+</html>
